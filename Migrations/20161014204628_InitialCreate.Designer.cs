@@ -8,7 +8,7 @@ using Bangazon.Data;
 namespace WebAPIApplication.Migrations
 {
     [DbContext(typeof(BangazonContext))]
-    [Migration("20161014163513_InitialCreate")]
+    [Migration("20161014204628_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,7 +110,8 @@ namespace WebAPIApplication.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
 
                     b.Property<string>("Description")
                         .IsRequired()

@@ -109,7 +109,8 @@ namespace WebAPIApplication.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("DateCreated")
-                        .ValueGeneratedOnAddOrUpdate();
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasDefaultValueSql("strftime('%Y-%m-%d %H:%M:%S')");
 
                     b.Property<string>("Description")
                         .IsRequired()

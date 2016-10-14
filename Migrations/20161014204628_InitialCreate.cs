@@ -29,7 +29,7 @@ namespace WebAPIApplication.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false)
                         .Annotation("Autoincrement", true),
-                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateCreated = table.Column<DateTime>(nullable: false, defaultValueSql: "strftime('%Y-%m-%d %H:%M:%S')"),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
                     Price = table.Column<double>(nullable: false)
                 },
