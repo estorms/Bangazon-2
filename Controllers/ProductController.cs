@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
+//I THINK that System.Linq allows access to sequel-type/querying language, while DbContext only allows for the USE of querying by representing an instance of a db interaction, but need to double-check this. Could be totally wrong!
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Bangazon.Data;
@@ -14,18 +16,23 @@ namespace WebAPIApplication.Controllers
     [Route("[controller]")] //annotation: route matches name of the values. PFM. ANNOTATIONS ALSO KNOWN AS DECORATORS
     public class ProductsController : Controller
     {
+        //Here we create a private property of type BangazonContext class (remember, BangazonContext inherits from DbContext) and call it context. Context is kept private, but it's being passed into the public methods defined in the ProductsController class every time the ProductsController custom constructor is being called. The context property, of type BangazonContext, is accessible every time an instance of ProductsController is created. 
         private BangazonContext context;
+
 
         public ProductsController(BangazonContext ctx)
         {
             context = ctx;
         }
       
+      
         // GET api/values/5
-        [HttpGet]
+        [HttpGet] //NEED TO BETTER UNDERSTAND WHAT THESE ANNOTATIONS DO!
+
+
         public IActionResult Get()
         {
-            //querying customer table in database context and selecting all customers, i.e., from the customer table, select everything.
+            //querying customer table in database context and selecting all customers, i.e., from the customer table, select everything. IQueryable relies on System.Linq
             IQueryable<object> products = from product in context.Product select product;
 
             if (products == null)
