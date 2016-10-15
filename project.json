@@ -1,5 +1,8 @@
+//This file is crucial: it's part of the Yeoman generator (WebAPIApplication) that we selected after making the directory and running npm install. When we restored the project, associated dependencies were injected (injecting dependencies seems to be what a generator actuall does when scaffolding a project)
+
 {
   "dependencies": {
+    //gives default .NETCore API'S
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
       "type": "platform"
