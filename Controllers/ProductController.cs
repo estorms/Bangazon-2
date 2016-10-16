@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
-//I THINK that System.Linq allows access to sequel-type/querying language, while DbContext only allows for the USE of querying by representing an instance of a db interaction, but need to double-check this. Could be totally wrong!
+//I THINK that System.Linq is a method of making SQL queries using C#, DbContext has built-in access to System.Linq, which is why you don't have to pass System.Linq into BangazonContext ... provides a C#-specific syntax for making SQL queries.
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Bangazon.Data;
