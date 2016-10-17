@@ -21,7 +21,7 @@ namespace WebAPIApplication.Controllers
         {
             context = ctx;
         }
-      
+
         // GET api/values/5
         [HttpGet]
         public IActionResult Get()
@@ -37,7 +37,7 @@ namespace WebAPIApplication.Controllers
             return Ok(customers); //http response of status 200 and return to client
 
         }
-        
+
         [HttpGet("{id}", Name = "GetCustomer")]
         public IActionResult Get([FromRoute] int id)
         {
@@ -54,7 +54,7 @@ namespace WebAPIApplication.Controllers
                 {
                     return NotFound();
                 }
-                
+
                 return Ok(customer);
             }
             catch (System.InvalidOperationException ex)
@@ -95,16 +95,50 @@ namespace WebAPIApplication.Controllers
             return CreatedAtRoute("GetCustomer", new { id = customer.CustomerId }, customer);
         }
 
+        
+
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]Customer customer)
         {
+               if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            context.Customer.Update(customer);
+            context.SaveChanges();
+
+            return Ok(customer);
+
         }
 
+
+   
+
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+    [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Customer customer = context.Customer.Single(m => m.CustomerId == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            
+            context.Customer.Remove(customer);
+            context.SaveChanges();
+
+            return Ok();
         }
 
         private bool CustomerExists(int id)

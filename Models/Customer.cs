@@ -9,7 +9,7 @@ namespace Bangazon.Models
   public class Customer
   //name of the class is the name of the database table
   {
-    [Key] //primary key, will be CustomerId, as defined below
+    [Key] //primary key, will be CustomerId, as defined below//key attribute is automatically required
 
     public int CustomerId {get;set;}
 

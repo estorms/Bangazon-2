@@ -23,7 +23,7 @@ namespace Bangazon.Data
             : base(options)
         { }
 
-        //This is where we are building the database, using the DbContext method of DbSet.
+        //This is where we are building the database, using the DbContext method of DbSet. DbSet exists in memory, not in database yet
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Order> Order { get; set; }
