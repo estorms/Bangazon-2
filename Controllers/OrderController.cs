@@ -95,15 +95,43 @@ namespace WebAPIApplication.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+      [HttpPut("{id}")]
+        public IActionResult Put(int id, [FromBody]Order order)
         {
+               if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (order == null)
+            {
+                return NotFound();
+            }
+            context.Order.Update(order);
+            context.SaveChanges();
+
+            return Ok(order);
+
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Order order = context.Order.Single(m => m.OrderId == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            
+            context.Order.Remove(order);
+            context.SaveChanges();
+
+            return Ok();
         }
 
         private bool OrderExists(int id)
