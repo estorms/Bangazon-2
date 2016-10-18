@@ -22,10 +22,11 @@ namespace WebAPIApplication.Controllers
         }
       
         // GET api/values/5
+        //this gets all the line items
         [HttpGet]
         public IActionResult Get()
         {
-            //querying customer table in database context and selecting all customers, i.e., from the customer table, select everything.
+        
             IQueryable<object> lineitems = from lineitem in context.LineItem select lineitem;
 
             if (lineitems == null)
@@ -37,7 +38,8 @@ namespace WebAPIApplication.Controllers
 
         }
         
-        [HttpGet("{id}", Name = "GetLineItem")]
+        //this gets a single line item by its PK
+        [HttpGet("{id}", Name = "GetLineItemByPK")]
         public IActionResult Get([FromRoute] int id)
         {
             if (!ModelState.IsValid)
@@ -65,6 +67,8 @@ namespace WebAPIApplication.Controllers
         }
 
         // POST api/values
+
+  
         [HttpPost]
         //FromBody means from the body of the request
         public IActionResult Post([FromBody] LineItem lineitem)
